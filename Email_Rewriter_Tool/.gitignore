@@ -1,0 +1,7 @@
+.env
+ERT_env/
+Personal_Notes.md
+Notes.md
+PDG_env/
+.venv/
+__pycache__/

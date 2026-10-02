@@ -1,8 +1,8 @@
 from openai import OpenAI
 from fastapi import FastAPI, HTTPException, status
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from dotenv import load_dotenv
-from typing import Literal
+from typing import Literal, Optional
 import os
 import json
 from tenacity import retry, stop_after_attempt, wait_exponential
@@ -81,7 +81,8 @@ def call_api(msg:str):
 
 class SentimentResponse(BaseModel):
     sentiment: Literal["frustrated", "neutral", "positive"]
-    confidence: float
+    # confidence: float = Field(gt=0, lt=1, default=None, description='Confidence between 0 to 1') Or
+    confidence: Optional[float] = None
     reason: str
 
 @app.post('/Analyze')
